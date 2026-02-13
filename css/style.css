@@ -7070,3 +7070,9 @@ Custom Css
 .pq-m-15 {
 	margin: 0 -15px 0 0;
 }
+
+.gallery-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
