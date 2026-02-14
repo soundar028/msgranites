@@ -55,6 +55,39 @@ Design and Developed by: PeacefulQode
             }
         });
 
+        /*==================================================
+        [ Image scroller ]
+        ==================================================*/
+
+        const track = document.getElementById('track');
+        const images = Array.from(track.children);
+    
+        // 1. Clone the images to create the infinite effect
+        images.forEach(img => {
+            const clone = img.cloneNode(true);
+            track.appendChild(clone);
+        });
+
+        let speed = 1; // Increase this number to go faster
+        let scrollPos = 0;
+
+        function animate() {
+            scrollPos -= speed;
+            
+            // 2. Check the width of the original 6 images
+            // Once we've scrolled past them, reset to 0 instantly
+            const halfWidth = track.scrollWidth / 2;
+            
+            if (Math.abs(scrollPos) >= halfWidth) {
+                scrollPos = 0;
+            }
+            
+            track.style.transform = `translateX(${scrollPos}px)`;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
 
         /*==================================================
         [ Accordion ]
