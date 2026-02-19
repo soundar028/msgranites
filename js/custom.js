@@ -392,13 +392,15 @@ Design and Developed by: PeacefulQode
     });
 
     function startAutoSlide() {
-        autoSlide = setInterval(nextSlide, 10000); // Change every 10 seconds
+        autoSlide = setInterval(nextSlide, 10000); // Change every 3 seconds
     }
 
     function resetAutoSlide() {
         clearInterval(autoSlide);
         startAutoSlide();
     }
+
+    startAutoSlide();
 
     /*==================================================
     [ wow ]
