@@ -7077,42 +7077,50 @@ Custom Css
     object-fit: cover;
 }
 
-.scroller-viewport {
+.slider {
     position: relative;
     width: 100%;
-    height: 100%;
+   	height: 100%;
+    margin: auto;
     overflow: hidden;
-    background: #000;
 }
 
-.overlay {
+.slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.1); /* 90% Visibility */
-    z-index: 10;
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* IMPORTANT */
+    object-position: center; /* Center image */
+    display: none;
 }
 
-.scroller-track {
-    display: flex;
-    width: max-content;
-    height: 100%;
-    will-change: transform;
-}
-
-.scroll-img {
-    height: 100%;
-    width: auto; /* Keeps original aspect ratio */
-    min-width: 300px; /* Ensures images don't collapse */
-    flex-shrink: 0;
-    object-fit: cover;
+.slide.active {
     display: block;
-    /* Height scale effect */
-    animation: heightPulse 8s ease-in-out infinite alternate;
 }
 
-@keyframes heightPulse {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.08); }
+
+button.prev,
+button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+button.prev { left: 10px; }
+button.next { right: 10px; }
+
+button:hover {
+    background: rgba(0,0,0,0.8);
 }
