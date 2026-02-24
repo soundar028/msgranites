@@ -59,34 +59,27 @@ Design and Developed by: PeacefulQode
         [ Image scroller ]
         ==================================================*/
 
-        const track = document.getElementById('track');
-        const images = Array.from(track.children);
-    
-        // 1. Clone the images to create the infinite effect
-        images.forEach(img => {
-            const clone = img.cloneNode(true);
-            track.appendChild(clone);
-        });
+        const track = document.querySelector('.scroller-track');
+        const images = document.querySelectorAll('.scroll-img');
 
-        let speed = 1; // Increase this number to go faster
-        let scrollPos = 0;
+        // Function to toggle play state
+        const setAnimationState = (state) => {
+          // Pauses the horizontal scroll (assuming it's a CSS animation)
+          track.style.animationPlayState = state;
+          
+          // Pauses the heightPulse animation on all images
+          images.forEach(img => {
+            img.style.animationPlayState = state;
+          });
+        };
 
-        function animate() {
-            scrollPos -= speed;
-            
-            // 2. Check the width of the original 6 images
-            // Once we've scrolled past them, reset to 0 instantly
-            const halfWidth = track.scrollWidth / 2;
-            
-            if (Math.abs(scrollPos) >= halfWidth) {
-                scrollPos = 0;
-            }
-            
-            track.style.transform = `translateX(${scrollPos}px)`;
-            requestAnimationFrame(animate);
-        }
+        // Desktop Hover
+        track.addEventListener('mouseenter', () => setAnimationState('paused'));
+        track.addEventListener('mouseleave', () => setAnimationState('running'));
 
-        animate();
+        // Mobile Touch
+        track.addEventListener('touchstart', () => setAnimationState('paused'));
+        track.addEventListener('touchend', () => setAnimationState('running'));
 
 
         /*==================================================
@@ -362,46 +355,6 @@ Design and Developed by: PeacefulQode
         Timeline();
     }
 
-    let slides = document.querySelectorAll(".slide");
-    let currentIndex = 0;
-    let autoSlide;
-
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove("active"));
-        slides[index].classList.add("active");
-    }
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        showSlide(currentIndex);
-    }
-
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        showSlide(currentIndex);
-    }
-
-    document.querySelector(".next").addEventListener("click", () => {
-        nextSlide();
-        resetAutoSlide();
-    });
-
-    document.querySelector(".prev").addEventListener("click", () => {
-        prevSlide();
-        resetAutoSlide();
-    });
-
-    function startAutoSlide() {
-        autoSlide = setInterval(nextSlide, 10000); // Change every 3 seconds
-    }
-
-    function resetAutoSlide() {
-        clearInterval(autoSlide);
-        startAutoSlide();
-    }
-
-    startAutoSlide();
-
     /*==================================================
     [ wow ]
     ==================================================*/
@@ -434,4 +387,3 @@ Design and Developed by: PeacefulQode
     });
 
 })(jQuery);
-
